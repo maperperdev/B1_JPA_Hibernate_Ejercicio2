@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	
+	<!-- Unidad de persistencia, es una unidad logica donde indicamos donde se persisten todos los objetos -->
+	<!-- Dentro definimos unas propiedades relacionadas con el acceso y el modo de conexion con mysql -->
+	<persistence-unit name="Persistencia">
+		
+		<!-- <class>entidades.Socio</class> -->
+		<!-- Si no indicamos esta etiqueta tambien nos crea automaticamente la tabla -->
+		<class>entidades.Libro</class>
+		<properties>
+			
+			<!-- Propiedades de conexion a mysql -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ejercicio1" />
+			<property name="javax.persistence.jdbc.user" value="usuario" />
+			<property name="javax.persistence.jdbc.password" value="usuario" />
+			
+			<!-- Creamos la siguiente propiedad para poder realizar un autocommit al realizar un DDL -->
+			<property name="hibernate.connection.autocommit" value="true" />			
+			
+			<!-- Las siguientes dos propiedades nos muestran cada consulta que le indicamos a la orm -->
+			<!-- Tambien vemos lo que la maquina ejecuta en segundo plano -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			
+			<!-- Las dos siguientes si son obligatorias no como las dos anteriores -->
+			<!-- Nos indican que vamos a realizar con el diseño de la bbdd y con quien se va a comunicar hibernate -->
+			<!-- https://docs.jboss.org/hibernate/orm/3.5/javadocs/org/hibernate/dialect/package-summary.html -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			
+			<!-- Le damos el valor de create porque al principio la bbdd esta vacia -->
+			<!-- Buscar en el siguiente enlace la tabla 3.7 -->
+			<!-- https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch03.html#d5e1655 -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<!-- Creamos y borramos si fuera necesario -->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
+		</properties>
+	</persistence-unit>
+
+</persistence>
